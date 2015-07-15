@@ -1,3 +1,8 @@
 #!/bin/sh
+# Part of blogger2cryogen project.
+# See https://github.com/sanel/blogger2cryogen for more details.
 
-java -jar target/blogger2cryogen-*-standalone.jar $@
+script=`realpath $0`
+script_path="`dirname $script`/../"
+
+java -jar $script_path/target/blogger2cryogen-*-standalone.jar $@

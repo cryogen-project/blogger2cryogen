@@ -1,4 +1,7 @@
-(ns blogger2cryogen.core
+(ns
+  ^{:author "Sanel Zukan"
+    :doc "Utility to migrate Blogger posts to Cryogen static site generator."}
+  blogger2cryogen.core
   (:gen-class)
   (:require [clojure.zip :as zip]
             [clojure.data.zip.xml :as zx]
@@ -37,6 +40,11 @@
   (when-let [^String name (-> s (.split "/") last)]
     (first (.split name "\\."))))
 
+(defn- escape-dquotes
+  "Escape double quotes. Mainly to fix title so we don't get malformed metadata."
+  [^String s]
+  (.replaceAll s "\"" "\\\\\""))
+
 (defn- tidy-html
   "Pass html string through JTidy for fixing it up if necessary."
   [^String s]
@@ -73,7 +81,9 @@
 (defn- do-dump
   "Actual content creator."
   [path title content tags]
-  (let [header (format "{:title \"%s\"\n :layout :post\n :tags %s\n :toc true}\n\n" title (vec tags))]
+  (let [header (format "{:title \"%s\"\n :layout :post\n :tags %s\n :toc true}\n\n"
+                       (escape-dquotes title)
+                       (vec tags))]
     (spit path (str header content))
     (println "Wrote" path)))
 
@@ -106,7 +116,7 @@
       (if-let [i (first nodes)]
         (let [zipper (zip/xml-zip i)
               term   (first (zx/xml-> zipper :category (zx/attr :term)))]
-          ;; only take int accout posts, not comments or other stuff
+          ;; only take into accout posts, not comments or other stuff
           (when (post? term)
             (let [;; tags are list so we can accept multiple tags
                   tags (next (zx/xml-> zipper :category (zx/attr :term)))
@@ -114,7 +124,6 @@
                   link (first (zx/xml-> zipper :link (zx/attr= :rel "alternate") (zx/attr :href)))
                   content (first (zx/xml-> zipper :content zx/text))
                   title   (first (zx/xml-> zipper :title zx/text))]
-
               (do-dump
                (create-filename posts-dir date link)
                title

@@ -38,10 +38,10 @@ describes the steps how to do it.
 ### Importing into Cryogen
 
 Make sure to install
-[cryogen-html](https://github.com/sanel/cryogen-html) plugin first,
-either in your running Cryogen blog or freshly created. This plugin
-will give your blog ability to render HTML posts, without additional
-conversion.
+[cryogen-html](https://github.com/sanel/cryogen-html) plugin
+first; you can install it in your existing Cryogen blog or the fresh
+one. This plugin will give your blog ability to render HTML posts
+without additional conversion.
 
 Inside `<YOUR-BLOG>/resources/templates` create folder `html` with:
 
