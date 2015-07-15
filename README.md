@@ -9,7 +9,8 @@ Small utility to easily migrate [Blogger](http://blogger.com) content to [Cryoge
 These are the steps on how to get blogger2cryogen up and running:
 
 1. make sure you have Java and [Leiningen](http://leiningen.org) installed
-2. clone this repository
+2. [download](https://github.com/sanel/blogger2cryogen/releases)
+   latest release or clone this repository
 3. in _blogger2cryogen_ folder, run `lein uberjar`
 
 By now, you should have it successfully compiled. To validate, run:
