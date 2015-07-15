@@ -1,0 +1,3 @@
+#!/bin/sh
+
+java -jar target/blogger2cryogen-*-standalone.jar $@
