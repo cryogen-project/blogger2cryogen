@@ -7,7 +7,6 @@
             [clojure.data.zip.xml :as zx]
             [clojure.string :as s]
             [clojure.xml :as xml]
-            [clojure.java.io :as io]
             [clojure.tools.cli :refer [parse-opts]])
   (:import org.w3c.tidy.Tidy
            [java.io File ByteArrayInputStream ByteArrayOutputStream]))
@@ -81,7 +80,7 @@
 (defn- do-dump
   "Actual content creator."
   [path title content tags]
-  (let [header (format "{:title \"%s\"\n :layout :post\n :tags %s\n :toc true}\n\n"
+  (let [header (format "{:title \"%s\"\n :layout :post\n :tags %s}\n\n"
                        (escape-dquotes title)
                        (vec tags))]
     (spit path (str header content))

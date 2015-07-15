@@ -1,4 +1,4 @@
-(defproject blogger2cryogen "0.1.0"
+(defproject blogger2cryogen "0.2.0"
   :description "Export Blogger content to Cryogen"
   :url "https://github.com/sanel/blogger2cryogen"
   :license {:name "Eclipse Public License"
